@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { FaSearch, FaHome, FaMapMarkerAlt, FaBed, FaBath, FaRulerCombined } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaBed, FaBath, FaRulerCombined } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 // Animation variants
 const fadeInUp = {
@@ -44,18 +45,18 @@ const heroTextVariants = {
   }
 };
 
-const searchBoxVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-      delay: 0.5
-    }
-  }
-};
+// const searchBoxVariants = {
+//   hidden: { opacity: 0, y: 20 },
+//   visible: {
+//     opacity: 1,
+//     y: 0,
+//     transition: {
+//       duration: 0.8,
+//       ease: "easeOut",
+//       delay: 0.5
+//     }
+//   }
+// };
 
 // Loading skeleton component
 function PropertySkeleton() {
@@ -101,13 +102,22 @@ function PropertiesList({ properties }) {
             href={`/properties/${property.id}`}
             className="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
           >
-            <div className="relative h-48">
+            {/* <div className="relative h-48">
               <img
                 src={property.images?.[0] || '/placeholder-house.jpg'}
                 alt={property.title}
                 className="w-full h-full object-cover"
               />
-            </div>
+            </div> */}
+            <div className="relative h-48">
+  <Image
+    src={property.images?.[0] || '/placeholder-house.jpg'}
+    alt={property.title}
+    layout="fill" // Ensures the image covers the div
+    objectFit="cover" // Keeps the aspect ratio and fills the container
+    priority // Improves performance for above-the-fold images
+  />
+</div>
             <div className="p-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-2">{property.title}</h3>
               <p className="text-2xl font-bold text-blue-700 mb-4">
@@ -328,14 +338,24 @@ export default function Home() {
               variants={fadeInUp}
               className="relative"
             >
-              <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+              {/* <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="/owner-image.jpg"
                   alt="Shivakumar & Lallithamma - Real Estate Experts"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-              </div>
+              </div> */}
+              <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+  <Image
+    src="/owner-image.jpg"
+    alt="Shivakumar & Lallithamma - Real Estate Experts"
+    layout="fill" // Makes image responsive
+    objectFit="cover" // Ensures it covers the container
+    priority // Ensures faster loading for above-the-fold images
+  />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+</div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -415,8 +435,7 @@ export default function Home() {
                   className="bg-white p-6 rounded-xl shadow-lg border border-gray-100"
                 >
                   <blockquote className="text-gray-700 italic">
-                    "At Sri Basaveshwara Real Estate, we believe in building relationships, not just closing deals. Our commitment to values and transparency has made us the most trusted name in real estate for the past 27 years."
-                  </blockquote>
+                  At Sri Basaveshwara Real Estate, we believe in building relationships, not just closing deals. Our commitment to values and transparency has made us the most trusted name in real estate for the past 27 years.                  </blockquote>
                   <div className="mt-4 flex items-center gap-3">
                     <div className="h-px flex-1 bg-gray-200"></div>
                     <p className="font-display font-semibold text-blue-600">Sri Basaveshwara Real Estate</p>

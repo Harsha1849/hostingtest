@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { FaHome, FaPhone, FaMapMarkerAlt, FaBuilding, FaChartLine, FaWhatsapp } from 'react-icons/fa';
+import { FaHome, FaPhone, FaMapMarkerAlt, FaBuilding } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const fadeInUp = {

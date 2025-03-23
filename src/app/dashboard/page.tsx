@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
 import DashboardShell from '@/components/DashboardShell';
 import { toast } from 'react-hot-toast';
 import { FaHome, FaEye, FaHeart, FaEnvelope } from 'react-icons/fa';
@@ -31,7 +31,7 @@ export default function DashboardPage() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [contactRequests, setContactRequests] = useState<ContactRequest[]>([]);
   const [loading, setLoading] = useState(true);
-  const [updatingStatus, setUpdatingStatus] = useState<string | null>(null);
+  // const [updatingStatus, setUpdatingStatus] = useState<string | null>(null);
 
   useEffect(() => {
     Promise.all([
@@ -64,29 +64,29 @@ export default function DashboardPage() {
     }
   };
 
-  const updateRequestStatus = async (requestId: string, newStatus: string) => {
-    setUpdatingStatus(requestId);
-    try {
-      const response = await fetch(`/api/contact/${requestId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ status: newStatus }),
-      });
+  // const updateRequestStatus = async (requestId: string, newStatus: string) => {
+  //   setUpdatingStatus(requestId);
+  //   try {
+  //     const response = await fetch(`/api/contact/${requestId}`, {
+  //       method: 'PATCH',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ status: newStatus }),
+  //     });
 
-      if (!response.ok) throw new Error('Failed to update status');
+  //     if (!response.ok) throw new Error('Failed to update status');
       
-      // Refresh contact requests after update
-      await fetchContactRequests();
-      toast.success('Status updated successfully');
-    } catch (error) {
-      console.error('Error updating status:', error);
-      toast.error('Failed to update status');
-    } finally {
-      setUpdatingStatus(null);
-    }
-  };
+  //     // Refresh contact requests after update
+  //     await fetchContactRequests();
+  //     toast.success('Status updated successfully');
+  //   } catch (error) {
+  //     console.error('Error updating status:', error);
+  //     toast.error('Failed to update status');
+  //   } finally {
+  //     setUpdatingStatus(null);
+  //   }
+  // };
 
   const stats = [
     {
@@ -142,12 +142,19 @@ export default function DashboardPage() {
   return (
     <DashboardShell>
       <div className="space-y-8">
-        <div>
+      <div>
+  <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
+  <p className="text-gray-600 mt-1">
+    Welcome back! Here&apos;s what&apos;s happening with your properties.
+  </p>
+</div>
+
+        {/* <div>
           <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
           <p className="text-gray-600 mt-1">
             Welcome back! Here's what's happening with your properties.
           </p>
-        </div>
+        </div> */}
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

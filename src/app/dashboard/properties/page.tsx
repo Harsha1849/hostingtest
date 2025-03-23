@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { FaPlus, FaEdit, FaTrash, FaEye } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 interface Property {
   id: string;
@@ -132,7 +133,7 @@ export default function PropertiesPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
                 >
-                  <div className="relative h-48">
+                  {/* <div className="relative h-48">
                     <img
                       src={property.images?.[0] || '/placeholder-house.jpg'}
                       alt={property.title}
@@ -141,7 +142,20 @@ export default function PropertiesPage() {
                     <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-semibold text-blue-600">
                       {property.status}
                     </div>
-                  </div>
+                  </div> */}
+                  <div className="relative h-48">
+  <Image
+    src={property.images?.[0] || '/placeholder-house.jpg'}
+    alt={property.title}
+    layout="fill" // Makes image responsive
+    objectFit="cover" // Ensures it covers the container
+    className="rounded-lg"
+  />
+  <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-semibold text-blue-600">
+    {property.status}
+  </div>
+</div>
+                  
                   <div className="p-6">
                     <h2 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-1">
                       {property.title}
